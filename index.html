@@ -34,18 +34,22 @@
 
     {{#if doLogin}}
       <h1>Login</h1>
-      <label>Email: <input type="email" value="{{email}}"></label>
-      <label>Password: <input type="password" value="{{password}}"></label>
-      <button type="submit" on-click="login">Login</button>
+      <form on-submit="login">
+        <label>Email: <input type="email" value="{{email}}"></label>
+        <label>Password: <input type="password" value="{{password}}"></label>
+        <button type="submit">Login</button>
+      </form>
       {{#if loginInvalid}}<p class="error">You blew it.</p>{{/if}}
       <p>Need to <a on-click="toggle('doLogin')">register</a>?</p>
     {{else}}
       <h1>Register</h1>
-      <label>Email: <input type="email" value="{{email}}"></label>
-      <label>Name: <input type="text" value="{{name}}"></label>
-      <label>Password: <input type="password" value="{{password1}}"></label>
-      <label>Confirm password: <input type="password" value="{{password2}}"></label>
-      <button type="submit" on-click="register">Register</button>
+      <form on-submit="register">
+        <label>Email: <input type="email" value="{{email}}"></label>
+        <label>Name: <input type="text" value="{{name}}"></label>
+        <label>Password: <input type="password" value="{{password1}}"></label>
+        <label>Confirm password: <input type="password" value="{{password2}}"></label>
+        <button type="submit">Register</button>
+      </form>
       {{#if registerInvalid}}<p class="error">You blew it.</p>{{/if}}
       <p>Already <a on-click="toggle('doLogin')">have an account</a>?</p>
     {{/if}}

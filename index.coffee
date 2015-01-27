@@ -31,7 +31,9 @@ ractive.observe 'isAuthenticated', (isAuthenticated) ->
         }
 
 
-ractive.on 'login', ->
+ractive.on 'login', (event) ->
+  event.original.preventDefault()
+
   isValid = =>
     return false if this.get('email') is ''
     return false if this.get('password') is ''
@@ -51,7 +53,9 @@ ractive.on 'login', ->
       '$last_login': new Date()
 
 
-ractive.on 'register', ->
+ractive.on 'register', (event) ->
+  event.original.preventDefault()
+
   isValid = =>
     return false if this.get('email') is ''
     return false if this.get('name') is ''
