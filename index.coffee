@@ -86,7 +86,6 @@ ractive.on 'register', (event) ->
       'name': this.get('name')
 
 
-
 ractive.on 'logout', ->
   delete localStorage.authUser
   this.set('isAuthenticated', false)

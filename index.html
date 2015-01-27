@@ -4,17 +4,27 @@
 <style>
   body {
     font: 16px/1.4 sans-serif;
+    margin: 0 auto;
+    max-width: 50em;
+    padding: 2em;
+  }
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  input {
+    font: inherit;
+    padding: 3px 5px;
   }
   .error {
     color: red;
   }
-  label {
-    display: block;
-    margin: 5px 0;
-  }
   a {
     color: blue;
     cursor: pointer;
+  }
+  .logout {
+    float: right;
   }
 </style>
 
@@ -22,12 +32,13 @@
 
 <script id="main" type="text/ractive">
   {{#if isAuthenticated}}
-    <a on-click="logout" style="float: right;">Logout</a>
+    <a on-click="logout" class="logout">Logout</a>
     <h1>Music Finder!</h1>
 
     {{#each tracks}}
       <p><iframe id="track_{{this}}" width="100%" height="166" scrolling="no" frameborder="no"
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{this}}&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe></p>
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{this}}&auto_play=false&buying=false&liking=false&download=false&sharing=false&show_artwork=true&show_comments=false&show_playcount=false&show_user=false&hide_related=false&visual=false&start_track=0&callback=true"
+        ></iframe></p>
     {{/each}}
 
   {{else}}
