@@ -19,16 +19,18 @@ ractive = new Ractive
 # Set up SoundCloud observers.
 ractive.observe 'isAuthenticated', (isAuthenticated) ->
   return unless isAuthenticated
-  for id in this.get('tracks')
-    widget = SC.Widget("track_#{id}")
-    widget.bind SC.Widget.Events.PLAY, ->
-      widget.getCurrentSound (sound) ->
-        mixpanel.track 'Play', {
-          id: sound._resource_id
-          title: sound.title
-          genre: sound.genre
-          url: sound.permalink_url
-        }
+  tracks = this.get('tracks')
+  setTimeout ->
+    for id in tracks
+      widget = SC.Widget("track_#{id}")
+      widget.bind SC.Widget.Events.PLAY, ->
+        widget.getCurrentSound (sound) ->
+          mixpanel.track 'Play', {
+            id: sound._resource_id
+            title: sound.title
+            genre: sound.genre
+            url: sound.permalink_url
+          }
 
 
 ractive.on 'login', (event) ->
