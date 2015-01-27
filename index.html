@@ -1,0 +1,61 @@
+<!doctype html>
+<title>Music Finder</title>
+<meta charset="utf-8">
+<style>
+  body {
+    font: 16px/1.4 sans-serif;
+  }
+  .error {
+    color: red;
+  }
+  label {
+    display: block;
+    margin: 5px 0;
+  }
+  a {
+    color: blue;
+    cursor: pointer;
+  }
+</style>
+
+<main></main>
+
+<script id="main" type="text/ractive">
+  {{#if isAuthenticated}}
+    <a on-click="logout" style="float: right;">Logout</a>
+    <h1>Music Finder!</h1>
+
+    {{#each tracks}}
+      <p><iframe id="track_{{this}}" width="100%" height="166" scrolling="no" frameborder="no"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{this}}&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe></p>
+    {{/each}}
+
+  {{else}}
+
+    {{#if doLogin}}
+      <h1>Login</h1>
+      <label>Email: <input type="email" value="{{email}}"></label>
+      <label>Password: <input type="password" value="{{password}}"></label>
+      <button type="submit" on-click="login">Login</button>
+      {{#if loginInvalid}}<p class="error">You blew it.</p>{{/if}}
+      <p>Need to <a on-click="toggle('doLogin')">register</a>?</p>
+    {{else}}
+      <h1>Register</h1>
+      <label>Email: <input type="email" value="{{email}}"></label>
+      <label>Name: <input type="text" value="{{name}}"></label>
+      <label>Password: <input type="password" value="{{password1}}"></label>
+      <label>Confirm password: <input type="password" value="{{password2}}"></label>
+      <button type="submit" on-click="register">Register</button>
+      {{#if registerInvalid}}<p class="error">You blew it.</p>{{/if}}
+      <p>Already <a on-click="toggle('doLogin')">have an account</a>?</p>
+    {{/if}}
+  {{/if}}
+</script>
+
+<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
+mixpanel.init("286e93f403bd633fff7d342f8aed2e72");</script><!-- end Mixpanel -->
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+
+<script src="bundle.js"></script>
