@@ -1,5 +1,10 @@
+<h1>Login</h1>
+
 <form on-submit="login">
   <label>Email: <input type="email" value="{{email}}"></label>
   <label>Password: <input type="password" value="{{password}}"></label>
   <button type="submit">Login</button>
 </form>
+
+{{#if loginInvalid}}<p class="error">You blew it.</p>{{/if}}
+<p>Need to <a href="#register">register</a>?</p>

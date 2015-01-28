@@ -1,3 +1,5 @@
+<h1>Register</h1>
+
 <form on-submit="register">
   <label>Email: <input type="email" value="{{email}}"></label>
   <label>Name: <input type="text" value="{{name}}"></label>
@@ -5,3 +7,6 @@
   <label>Confirm password: <input type="password" value="{{password2}}"></label>
   <button type="submit">Register</button>
 </form>
+
+{{#if registerInvalid}}<p class="error">You blew it.</p>{{/if}}
+<p>Already <a href="#login">have an account</a>?</p>
