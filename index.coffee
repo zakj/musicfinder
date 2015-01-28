@@ -1,13 +1,27 @@
-R = require('ramda')
+Backbone = require('backbone')
+Backbone.LocalStorage = require('backbone.localstorage')
 Ractive = require('ractive')
-Users = JSON.parse(localStorage.users or '{}')
+
+class User extends Backbone.Model
+  validate: (attrs, options) ->
+    return 'email required' unless _.isString(attrs.email)
+    return 'password required' unless _.isString(attrs.password)
+
+
+class Users extends Backbone.Collection
+  localStorage: new Backbone.LocalStorage('users')
+  model: User
+
+Ractive.partials.loginForm = require('./templates/login.html')
+Ractive.partials.registerForm = require('./templates/register.html')
+
 
 ractive = new Ractive
   el: document.querySelector('main')
   template: '#main'
   data:
     isAuthenticated: !!localStorage.authUser
-    doLogin: R.keys(Users).length > 0
+    doLogin: Object.keys(Users).length > 0
     tracks: [
       181645178
       180519630
@@ -63,7 +77,7 @@ ractive.on 'register', (event) ->
     return false if this.get('name') is ''
     return false if this.get('password1') is ''
     return false if this.get('password1') isnt this.get('password2')
-    return false if this.get('email') in R.keys(Users)
+    return false if this.get('email') in Object.keys(Users)
     true
 
   if not isValid()
